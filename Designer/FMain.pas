@@ -131,6 +131,8 @@ type
     function CheckSave: Boolean;
     procedure BuildAndPreview(const Preview: Boolean);
     procedure OpenWebsite(const Url: String);
+  strict protected
+    procedure SetDocumentOptions(document: TRibbonDocument);
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -369,6 +371,8 @@ constructor TFormMain.Create(AOwner: TComponent);
 begin
   inherited;
   FDocument := TRibbonDocument.Create;
+  SetDocumentOptions(FDocument);
+
   FCompiler := TRibbonCompiler.Create;
   FCompiler.OnMessage := RibbonCompilerMessage;
 
@@ -534,6 +538,14 @@ begin
     Log(MsgType, Msg);
 end;
 
+procedure TFormMain.SetDocumentOptions(document: TRibbonDocument);
+begin
+  if TSettings.Instance.SupportWindows8 then
+    document.Options := document.Options + [rdoWindows8Support]
+  else
+    document.Options := document.Options - [rdoWindows8Support];
+end;
+
 procedure TFormMain.ShowDocument;
 begin
   FFrameXmlSource.Deactivate;
@@ -550,7 +562,8 @@ var
 begin
   Form := TFormSettings.Create(TSettings.Instance);
   try
-    Form.ShowModal;
+    if Form.ShowModal = mrOK then
+      SetDocumentOptions(FDocument);
   finally
     Form.Release;
   end;

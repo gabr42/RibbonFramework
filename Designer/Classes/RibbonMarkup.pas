@@ -206,12 +206,16 @@ type
     property Symbol: String read FSymbol write SetSymbol;
   end;
 
+  TRibbonDocumentOption = (rdoWindows8Support);
+  TRibbonDocumentOptions = set of TRibbonDocumentOption;
+
   TRibbonDocument = class(TRibbonObject)
   {$REGION 'Internal Declarations'}
   strict private
     FFilename: String;
     FDirectory: String;
     FApplication: TRibbonApplication;
+    FOptions: TRibbonDocumentOptions;
   private
     function CreateObject(const ObjType: TRibbonObjectType): TRibbonObject;
   {$ENDREGION 'Internal Declarations'}
@@ -262,6 +266,9 @@ type
 
     { Directory containing the ribbon file, including trailing backslash }
     property Directory: String read FDirectory;
+
+    { Configuration options }
+    property Options: TRibbonDocumentOptions read FOptions write FOptions;
   end;
 
   TRibbonCommand = class(TRibbonObject)
