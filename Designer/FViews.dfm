@@ -1638,6 +1638,26 @@ object FrameViews: TFrameViews
       ImageIndex = 10
       OnExecute = ActionAddQatCheckBoxExecute
     end
+    object ActionAddQatDropDownGallery: TAction
+      Caption = 'Add Drop-Down Gallery'
+      ImageIndex = 15
+      OnExecute = ActionAddQatDropDownGalleryExecute
+    end
+    object ActionAddQatSplitButtonGallery: TAction
+      Caption = 'Add Split Button Gallery'
+      ImageIndex = 15
+      OnExecute = ActionAddQatSplitButtonGalleryExecute
+    end
+    object ActionAddQatInRibbonGallery: TAction
+      Caption = 'Add In-Ribbon Gallery'
+      ImageIndex = 17
+      OnExecute = ActionAddQatInRibbonGalleryExecute
+    end
+    object ActionAddQatComboBox: TAction
+      Caption = 'Add Combo Box'
+      ImageIndex = 7
+      OnExecute = ActionAddQatComboBoxExecute
+    end
     object ActionAddRibbonSizeDefinition: TAction
       Caption = 'Add Size Definition'
       ImageIndex = 25
@@ -1807,6 +1827,18 @@ object FrameViews: TFrameViews
     object MenuAddQatCheckBox: TMenuItem
       Action = ActionAddQatCheckBox
     end
+    object MenuAddQatDropDownGallery: TMenuItem
+      Action = ActionAddQatDropDownGallery
+    end
+    object MenuAddQatSplitButtonGallery: TMenuItem
+      Action = ActionAddQatSplitButtonGallery
+    end
+    object MenuAddQatInRibbonGallery: TMenuItem
+      Action = ActionAddQatInRibbonGallery
+    end
+    object MenuAddQatComboBox: TMenuItem
+      Action = ActionAddQatComboBox
+    end
     object MenuAddRibbonSizeDefinition: TMenuItem
       Action = ActionAddRibbonSizeDefinition
     end
@@ -1923,6 +1955,18 @@ object FrameViews: TFrameViews
     end
     object PopupAddQatCheckBox: TMenuItem
       Action = ActionAddQatCheckBox
+    end
+    object PopupAddQatDropDownGallery: TMenuItem
+      Action = ActionAddQatDropDownGallery
+    end
+    object PopupAddQatSplitButtonGallery: TMenuItem
+      Action = ActionAddQatSplitButtonGallery
+    end
+    object PopupAddQatInRibbonGallery: TMenuItem
+      Action = ActionAddQatInRibbonGallery
+    end
+    object PopupAddQatComboBox: TMenuItem
+      Action = ActionAddQatComboBox
     end
     object PopupAddRibbonSizeDefinition: TMenuItem
       Action = ActionAddRibbonSizeDefinition
