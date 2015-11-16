@@ -3,7 +3,7 @@ object FormSettings: TFormSettings
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Settings'
-  ClientHeight = 152
+  ClientHeight = 216
   ClientWidth = 559
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -89,7 +89,7 @@ object FormSettings: TFormSettings
   end
   object ButtonOk: TButton
     Left = 393
-    Top = 119
+    Top = 175
     Width = 75
     Height = 25
     Caption = 'OK'
@@ -100,7 +100,7 @@ object FormSettings: TFormSettings
   end
   object ButtonCancel: TButton
     Left = 474
-    Top = 119
+    Top = 175
     Width = 75
     Height = 25
     Cancel = True
@@ -108,11 +108,19 @@ object FormSettings: TFormSettings
     ModalResult = 2
     TabOrder = 2
   end
+  object cbWin8Support: TCheckBox
+    Left = 16
+    Top = 135
+    Width = 297
+    Height = 17
+    Caption = 'Enable support for Windows 8 Ribbon functionality'
+    TabOrder = 3
+  end
   object ImageList: TImageList
     Left = 120
     Top = 28
     Bitmap = {
-      494C010102000800240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -255,7 +263,7 @@ object FormSettings: TFormSettings
     DefaultExt = 'exe'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
     Title = 'Select compiler'
-    Left = 28
-    Top = 92
+    Left = 76
+    Top = 28
   end
 end
