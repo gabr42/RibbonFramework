@@ -68,7 +68,8 @@ type
     otRibbonSizeDefinition, otViewRibbon, otMiniToolbar, otContextMenu,
     otContextMap, otViewContextPopup, otApplication, otSplitButton_Items,
     otRibbonSizeDefinitions, otScalingPolicy_IdealSizes, otContextualTabs,
-    otMiniToolbars, otContextMenus, otContextMaps);
+    otMiniToolbars, otContextMenus, otContextMaps, otQatDropDownGallery,
+    otQatSplitButtonGallery, otQatInRibbonGallery, otQatComboBox);
 
 type
   TRibbonApplication = class;
@@ -617,6 +618,42 @@ type
   end;
 
   TRibbonQatCheckBox = class(TRibbonQatControl)
+  {$REGION 'Internal Declarations'}
+  protected
+    procedure Save(const Writer: TXmlWriter); override;
+  {$ENDREGION 'Internal Declarations'}
+  public
+    class function ObjectType: TRibbonObjectType; override;
+  end;
+
+  TRibbonQatDropDownGallery = class(TRibbonQatControl)
+  {$REGION 'Internal Declarations'}
+  protected
+    procedure Save(const Writer: TXmlWriter); override;
+  {$ENDREGION 'Internal Declarations'}
+  public
+    class function ObjectType: TRibbonObjectType; override;
+  end;
+
+  TRibbonQatSplitButtonGallery = class(TRibbonQatControl)
+  {$REGION 'Internal Declarations'}
+  protected
+    procedure Save(const Writer: TXmlWriter); override;
+  {$ENDREGION 'Internal Declarations'}
+  public
+    class function ObjectType: TRibbonObjectType; override;
+  end;
+
+  TRibbonQatInRibbonGallery = class(TRibbonQatControl)
+  {$REGION 'Internal Declarations'}
+  protected
+    procedure Save(const Writer: TXmlWriter); override;
+  {$ENDREGION 'Internal Declarations'}
+  public
+    class function ObjectType: TRibbonObjectType; override;
+  end;
+
+  TRibbonQatComboBox = class(TRibbonQatControl)
   {$REGION 'Internal Declarations'}
   protected
     procedure Save(const Writer: TXmlWriter); override;
@@ -2272,6 +2309,18 @@ begin
     otQatCheckBox:
       Result := TRibbonQatCheckBox.Create(Self);
 
+    otQatDropDownGallery:
+      Result := TRibbonQatDropDownGallery.Create(Self);
+
+    otQatSplitButtonGallery:
+      Result := TRibbonQatSplitButtonGallery.Create(Self);
+
+    otQatInRibbonGallery:
+      Result := TRibbonQatInRibbonGallery.Create(Self);
+
+    otQatComboBox:
+      Result := TRibbonQatComboBox.Create(Self);
+
     otRibbonSizeDefinition:
       Result := TRibbonRibbonSizeDefinition.Create(Self);
   else
@@ -3712,6 +3761,62 @@ begin
   Writer.WriteEndElement;
 end;
 
+{ TRibbonQatDropDownGallery }
+
+class function TRibbonQatDropDownGallery.ObjectType: TRibbonObjectType;
+begin
+  Result := otQatDropDownGallery;
+end;
+
+procedure TRibbonQatDropDownGallery.Save(const Writer: TXmlWriter);
+begin
+  Writer.WriteStartElement(EN_DROP_DOWN_GALLERY);
+  inherited;
+  Writer.WriteEndElement;
+end;
+
+{ TRibbonQatSplitButtonGallery }
+
+class function TRibbonQatSplitButtonGallery.ObjectType: TRibbonObjectType;
+begin
+  Result := otQatSplitButtonGallery;
+end;
+
+procedure TRibbonQatSplitButtonGallery.Save(const Writer: TXmlWriter);
+begin
+  Writer.WriteStartElement(EN_SPLIT_BUTTON_GALLERY);
+  inherited;
+  Writer.WriteEndElement;
+end;
+
+{ TRibbonQatInRibbonGallery }
+
+class function TRibbonQatInRibbonGallery.ObjectType: TRibbonObjectType;
+begin
+  Result := otQatInRibbonGallery;
+end;
+
+procedure TRibbonQatInRibbonGallery.Save(const Writer: TXmlWriter);
+begin
+  Writer.WriteStartElement(EN_IN_RIBBON_GALLERY);
+  inherited;
+  Writer.WriteEndElement;
+end;
+
+{ TRibbonQatComboBox }
+
+class function TRibbonQatComboBox.ObjectType: TRibbonObjectType;
+begin
+  Result := otQatComboBox;
+end;
+
+procedure TRibbonQatComboBox.Save(const Writer: TXmlWriter);
+begin
+  Writer.WriteStartElement(EN_COMBO_BOX);
+  inherited;
+  Writer.WriteEndElement;
+end;
+
 { TRibbonHelpButton }
 
 function TRibbonHelpButton.CanReorder: Boolean;
@@ -4754,7 +4859,9 @@ end;
 function TRibbonQuickAccessToolbar.AddNew(
   const ObjType: TRibbonObjectType): TRibbonObject;
 begin
-  if (ObjType in [otQatButton, otQatCheckBox, otQatToggleButton]) then
+  if (ObjType in [otQatButton, otQatCheckBox, otQatToggleButton]) or
+     ((rdoWindows8Support in Owner.Options)
+       and (ObjType in [otQatDropDownGallery, otQatSplitButtonGallery, otQatInRibbonGallery, otQatComboBox])) then
   begin
     Result := Owner.CreateObject(ObjType);
     FControls.Add(Result as TRibbonQatControl);
@@ -4796,6 +4903,16 @@ begin
         FControls.Add(TRibbonQatToggleButton.Create(Owner, GC))
       else if (GC.Name = EN_CHECK_BOX) then
         FControls.Add(TRibbonQatCheckBox.Create(Owner, GC))
+      else if not (rdoWindows8Support in Owner.Options) then
+        Error(GC, RS_UNSUPPORTED_CHILD_ELEMENT, [GC.Name, C.Name])
+      else if (GC.Name = EN_DROP_DOWN_GALLERY) then
+        FControls.Add(TRibbonQatDropDownGallery.Create(Owner, GC))
+      else if (GC.Name = EN_SPLIT_BUTTON_GALLERY) then
+        FControls.Add(TRibbonQatSplitButtonGallery.Create(Owner, GC))
+      else if (GC.Name = EN_IN_RIBBON_GALLERY) then
+        FControls.Add(TRibbonQatInRibbonGallery.Create(Owner, GC))
+      else if (GC.Name = EN_COMBO_BOX) then
+        FControls.Add(TRibbonQatComboBox.Create(Owner, GC))
       else
         Error(GC, RS_UNSUPPORTED_CHILD_ELEMENT, [GC.Name, C.Name]);
     end;

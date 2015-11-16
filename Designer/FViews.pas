@@ -1193,7 +1193,11 @@ begin
 
     otQatButton,
     otQatToggleButton,
-    otQatCheckBox:
+    otQatCheckBox,
+    otQatDropDownGallery,
+    otQatSplitButtonGallery,
+    otQatInRibbonGallery,
+    otQatComboBox:
       FCurrentFrame := FFrameQatControl;
 
     otDropDownGallery:
