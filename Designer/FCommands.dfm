@@ -1,24 +1,21 @@
 object FrameCommands: TFrameCommands
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 912
+  Height = 482
   Align = alClient
   TabOrder = 0
   object SplitterCommands: TSplitter
     Left = 225
     Top = 0
-    Height = 304
+    Height = 482
     ResizeStyle = rsUpdate
-    ExplicitLeft = 210
-    ExplicitTop = 1
-    ExplicitHeight = 414
   end
   object PanelCommands: TPanel
     Left = 0
     Top = 0
     Width = 225
-    Height = 304
+    Height = 482
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 0
@@ -66,7 +63,7 @@ object FrameCommands: TFrameCommands
       Left = 0
       Top = 22
       Width = 225
-      Height = 282
+      Height = 460
       Align = alClient
       Columns = <
         item
@@ -91,8 +88,8 @@ object FrameCommands: TFrameCommands
   object PanelCommandProperties: TPanel
     Left = 228
     Top = 0
-    Width = 223
-    Height = 304
+    Width = 684
+    Height = 482
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
@@ -101,7 +98,7 @@ object FrameCommands: TFrameCommands
     object LabelHeader: TLabel
       Left = 0
       Top = 0
-      Width = 223
+      Width = 684
       Height = 22
       Align = alTop
       AutoSize = False
@@ -116,12 +113,11 @@ object FrameCommands: TFrameCommands
       ParentFont = False
       Transparent = False
       Layout = tlCenter
-      ExplicitWidth = 757
     end
     object PanelProps: TPanel
       Left = 0
       Top = 22
-      Width = 223
+      Width = 684
       Height = 256
       Align = alTop
       BevelOuter = bvNone
@@ -554,7 +550,7 @@ object FrameCommands: TFrameCommands
     object PanelImages: TPanel
       Left = 0
       Top = 278
-      Width = 223
+      Width = 684
       Height = 47
       Align = alTop
       BevelOuter = bvNone
@@ -586,15 +582,12 @@ object FrameCommands: TFrameCommands
           ParentFont = False
           Transparent = False
           Layout = tlCenter
-          ExplicitLeft = 1
-          ExplicitTop = 1
-          ExplicitWidth = 286
         end
       end
       object PanelLargeImages: TPanel
         Left = 288
         Top = 0
-        Width = 583
+        Width = 396
         Height = 47
         Align = alClient
         BevelOuter = bvNone
@@ -602,7 +595,7 @@ object FrameCommands: TFrameCommands
         object Label21: TLabel
           Left = 0
           Top = 0
-          Width = 583
+          Width = 396
           Height = 20
           Align = alTop
           AutoSize = False
@@ -617,16 +610,14 @@ object FrameCommands: TFrameCommands
           ParentFont = False
           Transparent = False
           Layout = tlCenter
-          ExplicitTop = -6
-          ExplicitWidth = 469
         end
       end
     end
     object PanelHighContrastImages: TPanel
       Left = 0
       Top = 325
-      Width = 223
-      Height = 236
+      Width = 684
+      Height = 157
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
@@ -635,7 +626,7 @@ object FrameCommands: TFrameCommands
         Left = 0
         Top = 0
         Width = 288
-        Height = 236
+        Height = 157
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 0
@@ -657,22 +648,20 @@ object FrameCommands: TFrameCommands
           ParentFont = False
           Transparent = False
           Layout = tlCenter
-          ExplicitLeft = 6
-          ExplicitTop = -6
         end
       end
       object PanelLargeHCImages: TPanel
         Left = 288
         Top = 0
-        Width = 583
-        Height = 236
+        Width = 396
+        Height = 157
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
         object Label23: TLabel
           Left = 0
           Top = 0
-          Width = 583
+          Width = 396
           Height = 20
           Align = alTop
           AutoSize = False
@@ -687,8 +676,6 @@ object FrameCommands: TFrameCommands
           ParentFont = False
           Transparent = False
           Layout = tlCenter
-          ExplicitTop = -6
-          ExplicitWidth = 469
         end
       end
     end
@@ -698,7 +685,7 @@ object FrameCommands: TFrameCommands
     Left = 32
     Top = 60
     Bitmap = {
-      494C0101040008006C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010104000900040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

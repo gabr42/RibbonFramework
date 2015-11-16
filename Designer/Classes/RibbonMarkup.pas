@@ -108,7 +108,7 @@ type
     property ReferenceCount: Integer read GetReferenceCount;
   end;
 
-  TRibbonList<T: TRibbonObject> = class(TRibbonObject)
+  TRibbonList<T:class> = class(TRibbonObject)
   {$REGION 'Internal Declarations'}
   strict private
     FItems: TList<T>;
@@ -5108,7 +5108,7 @@ end;
 constructor TRibbonControlNameMap.Create(const Owner: TRibbonDocument);
 begin
   inherited Create(Owner);
-  FControlNameDefinitions := TList<String>.Create();
+  FControlNameDefinitions := TList<String>.Create;
 end;
 
 procedure TRibbonControlNameMap.Add(const Name: String);
@@ -5128,7 +5128,7 @@ var
   S: String;
 begin
   inherited Create(Owner);
-  FControlNameDefinitions := TList<String>.Create();
+  FControlNameDefinitions := TList<String>.Create;
   for C in E do
   begin
     if (C.Name = EN_CONTROL_NAME_DEFINITION) then

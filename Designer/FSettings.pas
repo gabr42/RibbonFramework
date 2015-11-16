@@ -21,15 +21,18 @@ type
   TFormSettings = class(TForm)
     GroupBoxPaths: TGroupBox;
     Label1: TLabel;
+    EditRibbonCompiler: TButtonedEdit;
+    Label2: TLabel;
+    EditResourceCompiler: TButtonedEdit;
     EditDelphiCompiler: TButtonedEdit;
     Label3: TLabel;
     ImageList: TImageList;
     ButtonOk: TButton;
     ButtonCancel: TButton;
     OpenDialog: TOpenDialog;
-    EditRibbonCompiler: TButtonedEdit;
     procedure EditPathChange(Sender: TObject);
     procedure EditRibbonCompilerRightButtonClick(Sender: TObject);
+    procedure EditResourceCompilerRightButtonClick(Sender: TObject);
     procedure EditDelphiCompilerRightButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
@@ -55,6 +58,7 @@ begin
   inherited Create(nil);
   FSettings := Settings;
   EditRibbonCompiler.Text := FSettings.RibbonCompilerPath;
+  EditResourceCompiler.Text := FSettings.ResourceCompilerPath;
   EditDelphiCompiler.Text := FSettings.DelphiCompilerPath;
   UpdateControls;
 end;
@@ -73,6 +77,15 @@ begin
   UpdateControls;
 end;
 
+procedure TFormSettings.EditResourceCompilerRightButtonClick(Sender: TObject);
+begin
+  OpenDialog.Filter := 'RC.exe|RC.exe';
+  OpenDialog.InitialDir := ExtractFilePath(EditResourceCompiler.Text);
+  OpenDialog.FileName := ExtractFileName(EditResourceCompiler.Text);
+  if (OpenDialog.Execute) then
+    EditResourceCompiler.Text := OpenDialog.FileName;
+end;
+
 procedure TFormSettings.EditRibbonCompilerRightButtonClick(Sender: TObject);
 begin
   OpenDialog.Filter := 'UICC.exe|UICC.exe';
@@ -87,6 +100,7 @@ begin
   if (ModalResult = mrOk) then
   begin
     FSettings.RibbonCompilerPath := EditRibbonCompiler.Text;
+    FSettings.ResourceCompilerPath := EditResourceCompiler.Text;
     FSettings.DelphiCompilerPath := EditDelphiCompiler.Text;
     FSettings.Save;
   end;
@@ -96,6 +110,7 @@ procedure TFormSettings.UpdateControls;
 begin
   ButtonOk.Enabled :=
     TFile.Exists(EditRibbonCompiler.Text) and
+    TFile.Exists(EditResourceCompiler.Text) and
     TFile.Exists(EditDelphiCompiler.Text);
 end;
 

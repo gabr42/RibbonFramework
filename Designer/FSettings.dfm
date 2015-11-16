@@ -30,16 +30,23 @@ object FormSettings: TFormSettings
       Height = 13
       Caption = 'Ribbon Compiler'
     end
+    object Label2: TLabel
+      Left = 12
+      Top = 51
+      Width = 89
+      Height = 13
+      Caption = 'Resource Compiler'
+    end
     object Label3: TLabel
       Left = 12
-      Top = 63
+      Top = 78
       Width = 145
       Height = 13
       Caption = 'Delphi Command Line Compiler'
     end
-    object EditDelphiCompiler: TButtonedEdit
+    object EditRibbonCompiler: TButtonedEdit
       Left = 163
-      Top = 60
+      Top = 21
       Width = 370
       Height = 21
       Images = ImageList
@@ -49,11 +56,11 @@ object FormSettings: TFormSettings
       RightButton.Visible = True
       TabOrder = 0
       OnChange = EditPathChange
-      OnRightButtonClick = EditDelphiCompilerRightButtonClick
+      OnRightButtonClick = EditRibbonCompilerRightButtonClick
     end
-    object EditRibbonCompiler: TButtonedEdit
+    object EditResourceCompiler: TButtonedEdit
       Left = 163
-      Top = 22
+      Top = 48
       Width = 370
       Height = 21
       Images = ImageList
@@ -63,7 +70,21 @@ object FormSettings: TFormSettings
       RightButton.Visible = True
       TabOrder = 1
       OnChange = EditPathChange
-      OnRightButtonClick = EditRibbonCompilerRightButtonClick
+      OnRightButtonClick = EditResourceCompilerRightButtonClick
+    end
+    object EditDelphiCompiler: TButtonedEdit
+      Left = 163
+      Top = 75
+      Width = 370
+      Height = 21
+      Images = ImageList
+      RightButton.HotImageIndex = 1
+      RightButton.ImageIndex = 0
+      RightButton.PressedImageIndex = 1
+      RightButton.Visible = True
+      TabOrder = 2
+      OnChange = EditPathChange
+      OnRightButtonClick = EditDelphiCompilerRightButtonClick
     end
   end
   object ButtonOk: TButton
@@ -91,7 +112,7 @@ object FormSettings: TFormSettings
     Left = 120
     Top = 28
     Bitmap = {
-      494C010102000800280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

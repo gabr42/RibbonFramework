@@ -15,7 +15,7 @@ object FormPreview: TFormPreview
   TextHeight = 13
   object PageControl: TPageControl
     Left = 0
-    Top = 117
+    Top = 0
     Width = 635
     Height = 462
     ActivePage = TabSheetColorize
@@ -23,10 +23,14 @@ object FormPreview: TFormPreview
     TabOrder = 0
     object TabSheetAppModes: TTabSheet
       Caption = 'Application Modes'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object LabelAppModes: TLabel
         Left = 0
         Top = 0
-        Width = 627
+        Width = 198
         Height = 13
         Align = alTop
         Caption = '* There are no application modes defined'
@@ -51,10 +55,14 @@ object FormPreview: TFormPreview
     object TabSheetContextTabs: TTabSheet
       Caption = 'Contextual Tabs'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object LabelContextTabs: TLabel
         Left = 0
         Top = 0
-        Width = 627
+        Width = 188
         Height = 13
         Align = alTop
         Caption = '* There are no contextual tabs defined'
@@ -79,10 +87,14 @@ object FormPreview: TFormPreview
     object TabSheetContextPopups: TTabSheet
       Caption = 'Context Popups'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object LabelContextPopups: TLabel
         Left = 0
         Top = 0
-        Width = 627
+        Width = 182
         Height = 13
         Align = alTop
         Caption = '* There are no context popus defined'
@@ -107,6 +119,10 @@ object FormPreview: TFormPreview
     object TabSheetColorize: TTabSheet
       Caption = 'Colorize'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBoxSamples: TGroupBox
         Left = 3
         Top = 3
@@ -711,13 +727,5 @@ object FormPreview: TFormPreview
         end
       end
     end
-  end
-  object Ribbon: TUIRibbon
-    Left = 0
-    Top = 0
-    Width = 635
-    Height = 117
-    ResourceName = 'APPLICATION'
-    OnCommandCreate = CommandCreated
   end
 end

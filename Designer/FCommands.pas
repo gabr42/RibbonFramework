@@ -18,7 +18,6 @@ uses
   StdCtrls,
   ImgList,
   ActnList,
-  Actions,
   RibbonMarkup,
   UIRibbonCommands,
   FImageList, Menus;
@@ -170,7 +169,6 @@ implementation
 {$R *.dfm}
 
 uses
-  UITypes,
   FMain;
 
 { TFrameCommands }
@@ -258,7 +256,7 @@ var
   command: TRibbonCommand;
   highID : integer;
 begin
-  highID := 1;
+  highID := 0;
   for command in FDocument.Application.Commands do
     if command.Id > highID then
       highID := command.Id;
