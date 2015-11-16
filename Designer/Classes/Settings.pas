@@ -16,6 +16,7 @@ type
     FRibbonCompilerPath: String;
     FResourceCompilerPath: String;
     FDelphiCompilerPath: String;
+    FSupportWindows8: boolean;
   private
     constructor Create(const Dummy: Integer); overload;
     procedure Load;
@@ -34,6 +35,8 @@ type
     property RibbonCompilerPath: String read FRibbonCompilerPath write FRibbonCompilerPath;
     property ResourceCompilerPath: String read FResourceCompilerPath write FResourceCompilerPath;
     property DelphiCompilerPath: String read FDelphiCompilerPath write FDelphiCompilerPath;
+
+    property SupportWindows8: boolean read FSupportWindows8 write FSupportWindows8;
   end;
 
 resourcestring
@@ -60,6 +63,7 @@ const // Setting Names
   SN_RIBBON_COMPILER   = 'RibbonCompiler';
   SN_RESOURCE_COMPILER = 'ResourceCompiler';
   SN_DELPHI_COMPILER   = 'DelphiCompiler';
+  SN_WINDOWS8_SUPPORT  = 'Win8Support';
 
 { TSettings }
 
@@ -185,7 +189,9 @@ begin
           else if (Name = SN_RESOURCE_COMPILER) and FileExists(Value) then
             FResourceCompilerPath := Value
           else if (Name = SN_DELPHI_COMPILER) and FileExists(Value) then
-            FDelphiCompilerPath := Value;
+            FDelphiCompilerPath := Value
+          else if (Name = SN_WINDOWS8_SUPPORT) then
+            FSupportWindows8 := StrToIntDef(Value, 0) = 1;
         end;
       end;
     end;
@@ -219,6 +225,7 @@ begin
     SaveSetting(SN_RIBBON_COMPILER, FRibbonCompilerPath);
     SaveSetting(SN_RESOURCE_COMPILER, FResourceCompilerPath);
     SaveSetting(SN_DELPHI_COMPILER, FDelphiCompilerPath);
+    SaveSetting(SN_WINDOWS8_SUPPORT, IntToStr(Ord(FSupportWindows8)));
     Writer.WriteEndElement;
     Xml := Writer.AsXml;
   finally

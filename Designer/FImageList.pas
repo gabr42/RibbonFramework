@@ -18,7 +18,7 @@ uses
   CommCtrl,
   ToolWin,
   RibbonMarkup,
-  UIRibbonCommands, Menus;
+  UIRibbonCommands, Menus, System.Actions, System.ImageList;
 
 type
   TImageFlag = (ifLarge, ifHighContrast);
@@ -72,6 +72,7 @@ implementation
 {$R *.dfm}
 
 uses
+  System.UITypes,
   StrUtils,
   IOUtils,
   Math,

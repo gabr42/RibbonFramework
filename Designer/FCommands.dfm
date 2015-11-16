@@ -1,21 +1,21 @@
 object FrameCommands: TFrameCommands
   Left = 0
   Top = 0
-  Width = 912
-  Height = 482
+  Width = 451
+  Height = 305
   Align = alClient
   TabOrder = 0
   object SplitterCommands: TSplitter
     Left = 225
     Top = 0
-    Height = 482
+    Height = 305
     ResizeStyle = rsUpdate
   end
   object PanelCommands: TPanel
     Left = 0
     Top = 0
     Width = 225
-    Height = 482
+    Height = 305
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 0
@@ -88,8 +88,8 @@ object FrameCommands: TFrameCommands
   object PanelCommandProperties: TPanel
     Left = 228
     Top = 0
-    Width = 684
-    Height = 482
+    Width = 223
+    Height = 305
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False

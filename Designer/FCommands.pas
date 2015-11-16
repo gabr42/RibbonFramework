@@ -20,7 +20,7 @@ uses
   ActnList,
   RibbonMarkup,
   UIRibbonCommands,
-  FImageList, Menus;
+  FImageList, Menus, System.Actions, System.ImageList;
 
 type
   TFrameCommands = class(TFrame)
@@ -115,7 +115,7 @@ type
     procedure EditDescriptionIdChange(Sender: TObject);
     procedure EditDescriptionSymbolChange(Sender: TObject);
     procedure UpDownChangingEx(Sender: TObject; var AllowChange: Boolean;
-      NewValue: SmallInt; Direction: TUpDownDirection);
+      NewValue: integer; Direction: TUpDownDirection);
     procedure EditTooltipTitleChange(Sender: TObject);
     procedure EditTooltipTitleIdChange(Sender: TObject);
     procedure EditTooltipTitleSymbolChange(Sender: TObject);
@@ -169,6 +169,7 @@ implementation
 {$R *.dfm}
 
 uses
+  System.UITypes,
   FMain;
 
 { TFrameCommands }
@@ -256,7 +257,7 @@ var
   command: TRibbonCommand;
   highID : integer;
 begin
-  highID := 0;
+  highID := 1;
   for command in FDocument.Application.Commands do
     if command.Id > highID then
       highID := command.Id;
@@ -640,7 +641,7 @@ begin
 end;
 
 procedure TFrameCommands.UpDownChangingEx(Sender: TObject;
-  var AllowChange: Boolean; NewValue: SmallInt; Direction: TUpDownDirection);
+  var AllowChange: Boolean; NewValue: integer; Direction: TUpDownDirection);
 var
   UpDown: TUpDown;
 begin

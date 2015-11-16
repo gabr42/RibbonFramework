@@ -15,7 +15,7 @@ uses
   StdCtrls,
   ImgList,
   ExtCtrls,
-  Settings;
+  Settings, System.ImageList;
 
 type
   TFormSettings = class(TForm)
@@ -30,6 +30,7 @@ type
     ButtonOk: TButton;
     ButtonCancel: TButton;
     OpenDialog: TOpenDialog;
+    cbWin8Support: TCheckBox;
     procedure EditPathChange(Sender: TObject);
     procedure EditRibbonCompilerRightButtonClick(Sender: TObject);
     procedure EditResourceCompilerRightButtonClick(Sender: TObject);
@@ -60,6 +61,7 @@ begin
   EditRibbonCompiler.Text := FSettings.RibbonCompilerPath;
   EditResourceCompiler.Text := FSettings.ResourceCompilerPath;
   EditDelphiCompiler.Text := FSettings.DelphiCompilerPath;
+  cbWin8Support.Checked := FSettings.SupportWindows8;
   UpdateControls;
 end;
 
@@ -102,6 +104,7 @@ begin
     FSettings.RibbonCompilerPath := EditRibbonCompiler.Text;
     FSettings.ResourceCompilerPath := EditResourceCompiler.Text;
     FSettings.DelphiCompilerPath := EditDelphiCompiler.Text;
+    FSettings.SupportWindows8 := cbWin8Support.Checked;
     FSettings.Save;
   end;
 end;

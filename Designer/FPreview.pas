@@ -8,7 +8,7 @@ uses
   StdCtrls, CheckLst, RibbonMarkup, BasicXml, Generics.Collections, ExtCtrls;
 
 type
-  TFormPreview = class(TUIRibbonForm)
+  TFormPreview = class(TForm)
     PageControl: TPageControl;
     TabSheetAppModes: TTabSheet;
     TabSheetContextTabs: TTabSheet;
@@ -75,6 +75,7 @@ type
     UpDownTextS: TUpDown;
     EditTextB: TEdit;
     UpDownTextB: TUpDown;
+    Ribbon: TUIRibbon;
     procedure CheckListBoxAppModesClickCheck(Sender: TObject);
     procedure CheckListBoxContextTabsClickCheck(Sender: TObject);
     procedure ListBoxContextPopupsClick(Sender: TObject);
@@ -82,9 +83,9 @@ type
     procedure EditBackgroundColorChange(Sender: TObject);
     procedure EditHighlightColorChange(Sender: TObject);
     procedure EditTextColorChange(Sender: TObject);
+    procedure CommandCreated(const Sender: TUIRibbon; const Command: TUICommand);
   private
     { Private declarations }
-    FInstance: THandle;
     FDocument: TRibbonDocument;
     FXmlDoc: TXmlDocument;
     FAllApplicationModes: Cardinal;
@@ -98,15 +99,10 @@ type
     procedure InitializeContextualTabs;
     procedure InitializeContextPopups;
     procedure InitializeColorization;
-  strict protected
-    procedure CommandCreated(const Sender: TUIRibbon;
-      const Command: TUICommand); override;
   public
     { Public declarations }
     constructor Create(const Instance: THandle; const Document: TRibbonDocument); reintroduce;
     destructor Destroy; override;
-
-    function RibbonInstance: THandle; override;
   end;
 
 resourcestring
@@ -134,23 +130,23 @@ const
 procedure TFormPreview.CheckListBoxAppModesClickCheck(Sender: TObject);
 var
   I, J: Integer;
-  AppModes: Cardinal;
+  AppModes: TRibbonApplicationModes;
 begin
-  AppModes := 0;
+  AppModes := [];
   for I := 0 to CheckListBoxAppModes.Count - 1 do
     if (CheckListBoxAppModes.Checked[I]) then
     begin
       J := Integer(CheckListBoxAppModes.Items.Objects[I]);
-      AppModes := AppModes or (1 shl J);
+      Include(AppModes, J);
     end;
 
-  if (AppModes = 0) then
+  if (AppModes = []) then
   begin
-    AppModes := 1;
+    Include(AppModes, 1);
     CheckListBoxAppModes.Checked[0] := True;
   end;
 
-  Ribbon.SetApplicationModes(AppModes);
+  Ribbon.ApplicationModes := AppModes;
 end;
 
 procedure TFormPreview.CheckListBoxContextTabsClickCheck(Sender: TObject);
@@ -177,7 +173,7 @@ constructor TFormPreview.Create(const Instance: THandle;
   const Document: TRibbonDocument);
 begin
   inherited Create(nil);
-  FInstance := Instance;
+  Ribbon.ResourceInstance := Instance;
   FDocument := Document;
   FCommandMap := TDictionary<String, Cardinal>.Create;
   FGalleryCommand := TUICommandAnchor.Create(Ribbon, 50001);
@@ -195,7 +191,7 @@ end;
 
 destructor TFormPreview.Destroy;
 begin
-  FreeLibrary(FInstance);
+  FreeLibrary(Ribbon.ResourceInstance);
   FXmlDoc.Free;
   FCommandMap.Free;
   inherited;
@@ -486,11 +482,6 @@ begin
         end;
       end;
   end;
-end;
-
-function TFormPreview.RibbonInstance: THandle;
-begin
-  Result := FInstance;
 end;
 
 end.

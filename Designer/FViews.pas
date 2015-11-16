@@ -16,6 +16,14 @@ uses
   ComCtrls,
   ToolWin,
   ImgList,
+  ActnList,
+  Menus,
+  PlatformDefaultStyleActnCtrls,
+  ActnPopup,
+  XPStyleActnCtrls,
+  System.Actions,
+  System.ImageList,
+  System.UITypes,
   RibbonMarkup,
   FBaseFrame,
   FViewRibbon,
@@ -49,8 +57,7 @@ uses
   FSpinner,
   FMiniToolbar,
   FContextMenu,
-  FContextMap, ActnList, Menus, PlatformDefaultStyleActnCtrls, ActnPopup,
-  XPStyleActnCtrls;
+  FContextMap;
 
 type
   TFrameViews = class(TFrame)
@@ -99,12 +106,24 @@ type
     ActionAddQatButton: TAction;
     ActionAddQatToggleButton: TAction;
     ActionAddQatCheckBox: TAction;
+    ActionAddQatDropDownGallery: TAction;
+    ActionAddQatSplitButtonGallery: TAction;
+    ActionAddQatInRibbonGallery: TAction;
+    ActionAddQatComboBox: TAction;
     MenuAddQatButton: TMenuItem;
     MenuAddQatToggleButton: TMenuItem;
     MenuAddQatCheckBox: TMenuItem;
+    MenuAddQatDropDownGallery: TMenuItem;
+    MenuAddQatSplitButtonGallery: TMenuItem;
+    MenuAddQatInRibbonGallery: TMenuItem;
+    MenuAddQatComboBox: TMenuItem;
     PopupAddQatButton: TMenuItem;
     PopupAddQatToggleButton: TMenuItem;
     PopupAddQatCheckBox: TMenuItem;
+    PopupAddQatDropDownGallery: TMenuItem;
+    PopupAddQatSplitButtonGallery: TMenuItem;
+    PopupAddQatInRibbonGallery: TMenuItem;
+    PopupAddQatComboBox: TMenuItem;
     ActionAddRibbonSizeDefinition: TAction;
     MenuAddRibbonSizeDefinition: TMenuItem;
     PopupAddRibbonSizeDefinition: TMenuItem;
@@ -189,6 +208,10 @@ type
     procedure ActionAddQatButtonExecute(Sender: TObject);
     procedure ActionAddQatToggleButtonExecute(Sender: TObject);
     procedure ActionAddQatCheckBoxExecute(Sender: TObject);
+    procedure ActionAddQatComboBoxExecute(Sender: TObject);
+    procedure ActionAddQatDropDownGalleryExecute(Sender: TObject);
+    procedure ActionAddQatInRibbonGalleryExecute(Sender: TObject);
+    procedure ActionAddQatSplitButtonGalleryExecute(Sender: TObject);
     procedure ActionAddRibbonSizeDefinitionExecute(Sender: TObject);
     procedure ActionAddGroupSizeDefinitionExecute(Sender: TObject);
     procedure ActionAddControlSizeDefinitionExecute(Sender: TObject);
@@ -284,6 +307,7 @@ type
     function GetObject(const Node: TTreeNode; out Obj: TRibbonObject): Boolean;
     procedure Modified;
     function AddNewObject(const ObjType: TRibbonObjectType): TRibbonObject;
+    function GetImage(const ObjectType: TRibbonObjectType): integer;
     procedure MoveNode(const Direction: Integer);
   public
     { Public declarations }
@@ -350,6 +374,7 @@ implementation
 {$R *.dfm}
 
 uses
+  Settings,
   FMain;
 
 { TFrameRibbon }
@@ -463,7 +488,7 @@ var
   MenuGroup: TRibbonMenuGroup;
   OrigSelectAddedNode: Boolean;
 begin
-  Node := AddNode(Parent, Control.DisplayName, Ord(Control.ObjectType), Control);
+  Node := AddNode(Parent, Control.DisplayName, GetImage(Control.ObjectType), Control);
   OrigSelectAddedNode := FSelectAddedNode;
   FSelectAddedNode := False;
   try
@@ -1058,6 +1083,10 @@ begin
   ActionAddQatButton.Visible := (ObjType in [otQuickAccessToolbar]);
   ActionAddQatToggleButton.Visible := (ObjType in [otQuickAccessToolbar]);
   ActionAddQatCheckBox.Visible := (ObjType in [otQuickAccessToolbar]);
+  ActionAddQatDropDownGallery.Visible := (ObjType in [otQuickAccessToolbar]) and TSettings.Instance.SupportWindows8;
+  ActionAddQatSplitButtonGallery.Visible := (ObjType in [otQuickAccessToolbar]) and TSettings.Instance.SupportWindows8;
+  ActionAddQatInRibbonGallery.Visible := (ObjType in [otQuickAccessToolbar]) and TSettings.Instance.SupportWindows8;
+  ActionAddQatComboBox.Visible := (ObjType in [otQuickAccessToolbar]) and TSettings.Instance.SupportWindows8;
   ActionAddRibbonSizeDefinition.Visible := (ObjType in [otRibbonSizeDefinitions]);
   ActionAddGroupSizeDefinition.Visible := (ObjType in [otRibbonSizeDefinition, otSizeDefinition]);
   ActionAddControlSizeDefinition.Visible := (ObjType in [otGroupSizeDefinition, otRow, otControlSizeGroup]);
@@ -1186,7 +1215,11 @@ begin
 
     otQatButton,
     otQatToggleButton,
-    otQatCheckBox:
+    otQatCheckBox,
+    otQatDropDownGallery,
+    otQatSplitButtonGallery,
+    otQatInRibbonGallery,
+    otQatComboBox:
       FCurrentFrame := FFrameQatControl;
 
     otDropDownGallery:
@@ -1443,6 +1476,26 @@ begin
   AddNewObject(otQatCheckBox);
 end;
 
+procedure TFrameViews.ActionAddQatComboBoxExecute(Sender: TObject);
+begin
+  AddNewObject(otQatComboBox);
+end;
+
+procedure TFrameViews.ActionAddQatDropDownGalleryExecute(Sender: TObject);
+begin
+  AddNewObject(otQatDropDownGallery);
+end;
+
+procedure TFrameViews.ActionAddQatInRibbonGalleryExecute(Sender: TObject);
+begin
+  AddNewObject(otQatInRibbonGallery);
+end;
+
+procedure TFrameViews.ActionAddQatSplitButtonGalleryExecute(Sender: TObject);
+begin
+  AddNewObject(otQatSplitButtonGallery);
+end;
+
 procedure TFrameViews.ActionAddQatToggleButtonExecute(Sender: TObject);
 begin
   AddNewObject(otQatToggleButton);
@@ -1594,6 +1647,20 @@ begin
   FFrameDropDownColorPicker.Activate;
   FFrameSpinner.Activate;
   FFrameContextMap.Activate;
+end;
+
+function TFrameViews.GetImage(const ObjectType: TRibbonObjectType): integer;
+begin
+  if ObjectType < otQatDropDownGallery then
+    Result := Ord(ObjectType)
+  else if ObjectType = otQatDropDownGallery then
+    Result := Ord(otDropDownGallery)
+  else if ObjectType = otQatSplitButtonGallery then
+    Result := Ord(otSplitButtonGallery)
+  else if ObjectType = otQatInRibbonGallery then
+    Result := Ord(otInRibbonGallery)
+  else if ObjectType = otQatComboBox then
+    Result := Ord(otComboBox);
 end;
 
 end.

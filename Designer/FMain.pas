@@ -10,6 +10,8 @@ uses
   Classes,
   Graphics,
   Controls,
+  System.ImageList,
+  System.Actions,
   Forms,
   Dialogs,
   ComCtrls,
@@ -129,6 +131,8 @@ type
     function CheckSave: Boolean;
     procedure BuildAndPreview(const Preview: Boolean);
     procedure OpenWebsite(const Url: String);
+  strict protected
+    procedure SetDocumentOptions(document: TRibbonDocument);
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -157,6 +161,9 @@ resourcestring
     'Do you want to continue to save this document?';
 
 implementation
+
+uses
+  System.UITypes;
 
 {$R *.dfm}
 
@@ -364,6 +371,8 @@ constructor TFormMain.Create(AOwner: TComponent);
 begin
   inherited;
   FDocument := TRibbonDocument.Create;
+  SetDocumentOptions(FDocument);
+
   FCompiler := TRibbonCompiler.Create;
   FCompiler.OnMessage := RibbonCompilerMessage;
 
@@ -392,6 +401,8 @@ end;
 procedure TFormMain.FormActivate(Sender: TObject);
 begin
   MemoMessages.SelLength := 0;
+  if ParamStr(1) <> '' then
+    OpenFile(ParamStr(1));
 end;
 
 procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -527,6 +538,14 @@ begin
     Log(MsgType, Msg);
 end;
 
+procedure TFormMain.SetDocumentOptions(document: TRibbonDocument);
+begin
+  if TSettings.Instance.SupportWindows8 then
+    document.Options := document.Options + [rdoWindows8Support]
+  else
+    document.Options := document.Options - [rdoWindows8Support];
+end;
+
 procedure TFormMain.ShowDocument;
 begin
   FFrameXmlSource.Deactivate;
@@ -543,7 +562,8 @@ var
 begin
   Form := TFormSettings.Create(TSettings.Instance);
   try
-    Form.ShowModal;
+    if Form.ShowModal = mrOK then
+      SetDocumentOptions(FDocument);
   finally
     Form.Release;
   end;
