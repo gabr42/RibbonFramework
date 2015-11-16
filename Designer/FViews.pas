@@ -16,6 +16,14 @@ uses
   ComCtrls,
   ToolWin,
   ImgList,
+  ActnList,
+  Menus,
+  PlatformDefaultStyleActnCtrls,
+  ActnPopup,
+  XPStyleActnCtrls,
+  System.Actions,
+  System.ImageList,
+  System.UITypes,
   RibbonMarkup,
   FBaseFrame,
   FViewRibbon,
@@ -49,8 +57,7 @@ uses
   FSpinner,
   FMiniToolbar,
   FContextMenu,
-  FContextMap, ActnList, Menus, PlatformDefaultStyleActnCtrls, ActnPopup,
-  XPStyleActnCtrls;
+  FContextMap;
 
 type
   TFrameViews = class(TFrame)

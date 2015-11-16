@@ -10,6 +10,8 @@ uses
   Classes,
   Graphics,
   Controls,
+  System.ImageList,
+  System.Actions,
   Forms,
   Dialogs,
   ComCtrls,
@@ -157,6 +159,9 @@ resourcestring
     'Do you want to continue to save this document?';
 
 implementation
+
+uses
+  System.UITypes;
 
 {$R *.dfm}
 
@@ -392,6 +397,8 @@ end;
 procedure TFormMain.FormActivate(Sender: TObject);
 begin
   MemoMessages.SelLength := 0;
+  if ParamStr(1) <> '' then
+    OpenFile(ParamStr(1));
 end;
 
 procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);

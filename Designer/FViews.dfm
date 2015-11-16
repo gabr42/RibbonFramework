@@ -2,23 +2,20 @@ object FrameViews: TFrameViews
   Left = 0
   Top = 0
   Width = 451
-  Height = 304
+  Height = 305
   Align = alClient
   TabOrder = 0
   object SplitterRibbon: TSplitter
     Left = 225
     Top = 0
-    Height = 304
+    Height = 305
     ResizeStyle = rsUpdate
-    ExplicitLeft = 160
-    ExplicitTop = 72
-    ExplicitHeight = 100
   end
   object PanelRibbon: TPanel
     Left = 0
     Top = 0
     Width = 225
-    Height = 304
+    Height = 305
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 0
@@ -69,7 +66,7 @@ object FrameViews: TFrameViews
       Left = 0
       Top = 22
       Width = 225
-      Height = 282
+      Height = 283
       Align = alClient
       HideSelection = False
       Images = ImageListTreeView
@@ -86,7 +83,7 @@ object FrameViews: TFrameViews
     Left = 228
     Top = 0
     Width = 223
-    Height = 304
+    Height = 305
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
@@ -97,7 +94,7 @@ object FrameViews: TFrameViews
     Left = 72
     Top = 112
     Bitmap = {
-      494C01012800F800B40210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010128002D00040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000B0000000010020000000000000B0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

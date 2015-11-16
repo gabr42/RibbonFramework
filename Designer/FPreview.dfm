@@ -15,7 +15,7 @@ object FormPreview: TFormPreview
   TextHeight = 13
   object PageControl: TPageControl
     Left = 0
-    Top = 0
+    Top = 117
     Width = 635
     Height = 462
     ActivePage = TabSheetColorize
@@ -727,5 +727,13 @@ object FormPreview: TFormPreview
         end
       end
     end
+  end
+  object Ribbon: TUIRibbon
+    Left = 0
+    Top = 0
+    Width = 635
+    Height = 117
+    ResourceName = 'APPLICATION'
+    OnCommandCreate = CommandCreated
   end
 end

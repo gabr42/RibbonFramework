@@ -108,7 +108,7 @@ type
     property ReferenceCount: Integer read GetReferenceCount;
   end;
 
-  TRibbonList<T:class> = class(TRibbonObject)
+  TRibbonList<T: TRibbonObject> = class(TRibbonObject)
   {$REGION 'Internal Declarations'}
   strict private
     FItems: TList<T>;
